@@ -21,7 +21,7 @@ use PDOException;
  */
 class Oci8Connection extends Connection
 {
-    public $pdoClass = 'Yajra\Pdo\Oci8';
+    public $pdoClass = 'pdynarowski\Pdo\Oci8';
 
     /**
      * @var string Class name for oci schemaMap
@@ -90,7 +90,6 @@ class Oci8Connection extends Connection
             else if (is_array($this->cachedSchema)) {
                 $this->cachedSchema['db'] = $this;
                 $this->cachedSchema = \Yii::createObject($this->cachedSchema);
-                //$this->cachedSchema = new CachedSchema(['db' => $this]);
                 return $this->cachedSchema;
             } else {
                 throw new ConfigurationException('The "cachedSchema" property must be an configuration array');

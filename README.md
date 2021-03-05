@@ -1,12 +1,13 @@
 # Yii2-Oci8
+This extension is forked Neconix/Yii2-Oci8 to support newer versions yajra/pdo-via-oci8 and PHP 8
 Yii2 OCI8 extension which uses well written [pdynarowski/pdo-via-oci8](https://github.com/pdynarowski/pdo-via-oci8) 
 with optional full table schema caching. Supported PHP 7.4 and 8.
 
 **Supported**
-- Yii 2.x;
-- yajra/pdo-via-oci8 2.x;
-- \>= PHP 7.4.
-- \>= PHP 8.
+- Yii 2.x
+- yajra/pdo-via-oci8 2.x
+- \>= PHP 7.4
+- \>= PHP 8
 
 **Installation**
 
@@ -14,7 +15,7 @@ Add to your `composer.json` file:
 
 ```
    "require": {
-     "neconix/yii2-oci8": "2.*"
+     "pdynarowski/yii2-oci8": "^1.1"
    }
 ```
 
@@ -39,24 +40,32 @@ Database configuration in `db.php`:
 
 ```php
 return [
-    'class' => 'neconix\yii2oci8\Oci8Connection',
-    'dsn' => 'oci:dbname=//192.168.0.1:1521/db.local;charset=AL32UTF8;',
-    'username' => 'user',
-    'password' => 'pass',
-    'attributes' => [ PDO::ATTR_PERSISTENT => true ],
-    'enableSchemaCache' => true, //Oracle dictionaries is too slow :(, enable caching
-    'schemaCacheDuration' => 60 * 60, //1 hour
-    'on afterOpen' => function($event) {
-
-    /* A session configuration example */
-        $q = <<<SQL
-begin
-  execute immediate 'alter session set NLS_SORT=BINARY_CI';
-  execute immediate 'alter session set NLS_TERRITORY=AMERICA';
-end;
-SQL;
-        $event->sender->createCommand($q)->execute();
-    }
+'class' => 'pdynarowski\yii2oci8\Oci8Connection',
+        'dsn' => 'oci:dbname=//192.168.0.1:1521/instance_name;charset=UTF8',
+        'username' => 'username',
+        'password' => 'password',
+        'enableSchemaCache' => false,
+        'on afterOpen' => function($event) {
+            $event->sender->createCommand("ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS'")->execute();
+        },
+        'schemaCacheDuration' => 0,
+        'attributes' => [ PDO::ATTR_PERSISTENT => true ],
+        'on afterOpen' => function($event)
+        {
+            /* @var $schema \neconix\yii2oci8\CachedSchema */
+            $event->sender->createCommand("ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS'")->execute();
+            $schema = $event->sender->getSchema();
+            $schema->schemaCacheDuration = 0; // 0 - never expire
+            if (!$schema->isCached) {
+                //Rebuild schema cache
+                $schema->buildSchemaCache();
+            }
+        },
+        //Defining a cache schema component
+        'cachedSchema' => [
+            'class' => 'pdynarowski\yii2oci8\CachedSchema',
+            'schemaCacheDuration'=>0, //60*60,
+        ],
 ];
 ```
 
@@ -91,7 +100,7 @@ To enable caching for all tables in a schema add lines below in a database conne
     
     //Defining a cache schema component
     'cachedSchema' => [
-        'class' => 'neconix\yii2oci8\CachedSchema',
+        'class' => 'pdynarowski\yii2oci8\CachedSchema',
         // Optional, default is the current connection schema.
         'cachingSchemas' => ['HR', 'SCOTT'],
         // Optional. This callback must return `true` for a table name if it need to be cached.
@@ -111,7 +120,7 @@ To build schema cache after a connection opens:
     {
         $event->sender->createCommand($q)->execute();
 
-        /* @var $schema \neconix\yii2oci8\CachedSchema */
+        /* @var $schema \pdynarowski\yii2oci8\CachedSchema */
         $schema = $event->sender->getSchema();
 
         if (!$schema->isCached)
