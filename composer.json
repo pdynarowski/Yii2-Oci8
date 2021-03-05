@@ -21,7 +21,7 @@
 
   "autoload": {
     "psr-4": {
-      "neconix\\yii2oci8\\": "src/"
+      "pdynarowski\\yii2oci8\\": "src/"
     }
   }
 
