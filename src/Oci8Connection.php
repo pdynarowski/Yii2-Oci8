@@ -3,9 +3,10 @@
  * The OCI8 connection class for Yii2
  *
  * @author Neconix (prostoe@gmail.com)
+ * @author Paweł Dynarowski (pdynarowski@gmail.com)
  */
 
-namespace neconix\yii2oci8;
+namespace pdynarowski\yii2oci8;
 
 use Codeception\Exception\ConfigurationException;
 use yii\base\NotSupportedException;

@@ -1,5 +1,5 @@
 # Yii2-Oci8
-Yii2 OCI8 extension which uses well written [yajra/pdo-via-oci8](https://github.com/yajra/pdo-via-oci8) 
+Yii2 OCI8 extension which uses well written [pdynarowski/pdo-via-oci8](https://github.com/pdynarowski/pdo-via-oci8) 
 with optional full table schema caching. Supported PHP 7.4 and 8.
 
 **Supported**
