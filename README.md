@@ -1,12 +1,12 @@
 # Yii2-Oci8
 Yii2 OCI8 extension which uses well written [yajra/pdo-via-oci8](https://github.com/yajra/pdo-via-oci8) 
-with optional full table schema caching. Supported PHP7.
+with optional full table schema caching. Supported PHP 7.4 and 8.
 
 **Supported**
 - Yii 2.x;
-- yajra/pdo-via-oci8 1.x;
-- \>= PHP 5.4;
-- \>= PHP 7.0.
+- yajra/pdo-via-oci8 2.x;
+- \>= PHP 7.4.
+- \>= PHP 8.
 
 **Installation**
 
@@ -14,7 +14,7 @@ Add to your `composer.json` file:
 
 ```
    "require": {
-     "neconix/yii2-oci8": "1.*"
+     "neconix/yii2-oci8": "2.*"
    }
 ```
 
