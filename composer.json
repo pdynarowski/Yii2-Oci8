@@ -1,5 +1,5 @@
 {
-  "name": "neconix/yii2-oci8",
+  "name": "pdynarowski/yii2-oci8",
   "description": "Yii2 extension which uses well written pdo-via-oci8 package for standard PHP Oracle functions (OCI8)",
   "type": "library",
   "keywords": ["yii2", "oracle", "oci8", "database"],
@@ -7,13 +7,12 @@
   "authors": [
     {
       "name": "Neconix",
-      "email": "prostoe@gmail.com",
+      "email": "pdynarowski@gmail.com",
       "role": "Developer"
     }
   ],
   "support": {
-    "email": "prostoe@gmail.com",
-    "issues": "https://github.com/Neconix/Yii2-Oci8/issues"
+    "email": "pdynarowski@gmail.com"
   },
   "require": {
     "php" : "^7.0 || ^8.0",
