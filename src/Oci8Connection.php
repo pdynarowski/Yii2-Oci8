@@ -29,12 +29,12 @@ class Oci8Connection extends Connection
     public $schemaClass = 'yii\db\oci\Schema';
 
     /**
-     * @var bool If true cached schema will be created using neconix\yii2oci8\CachedSchema
+     * @var bool If true cached schema will be created using pdynarowski\yii2oci8\CachedSchema
      */
     public $useCachedSchema = false;
 
     /**
-     * @var CachedSchema Contains an instance of the [[neconix\yii2oci8\CachedSchema]] when $useCachedSchema is true
+     * @var CachedSchema Contains an instance of the [[pdynarowski\yii2oci8\CachedSchema]] when $useCachedSchema is true
      */
     public $cachedSchema;
 
@@ -76,7 +76,7 @@ class Oci8Connection extends Connection
 
     /**
      * Returns the schema information for the database opened by this connection.
-     * @return \yii\db\Schema|\neconix\yii2oci8\CachedSchema Schema the schema information for the database opened by this connection.
+     * @return \yii\db\Schema|\pdynarowski\yii2oci8\CachedSchema Schema the schema information for the database opened by this connection.
      * @throws NotSupportedException NotSupportedException if there is no support for the current driver type
      * @throws ConfigurationException
      */
