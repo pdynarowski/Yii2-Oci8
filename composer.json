@@ -15,8 +15,8 @@
     "email": "pdynarowski@gmail.com"
   },
   "require": {
-    "php" : "^7.0 || ^8.0",
-    "yajra/laravel-pdo-via-oci8": "2.*"
+    "php" : "^8.0",
+    "yajra/laravel-pdo-via-oci8": "^3.0"
   },
 
   "autoload": {
