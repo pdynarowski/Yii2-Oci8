@@ -16,7 +16,7 @@
   },
   "require": {
     "php" : "^7.2",
-    "yajra/laravel-pdo-via-oci8": "2.*"
+    "yajra/laravel-pdo-via-oci8": "^2.2.0"
   },
 
   "autoload": {
